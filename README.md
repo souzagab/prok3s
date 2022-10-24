@@ -6,8 +6,8 @@ https://austinsnerdythings.com/2021/09/23/deploying-kubernetes-vms-in-proxmox-wi
 
 https://pawa.lt/posts/2019/07/automating-k3s-deployment-on-proxmox/
 https://greg.jeanmart.me/2020/04/13/install-and-configure-a-kubernetes-cluster-w/
-
-
+https://docs.technotim.live/posts/k3s-traefik-rancher/
+https://docs.technotim.live/posts/traefik-portainer-ssl/
 export PM_USER="terraform-prov@pve"
 export PM_PASS="Script00"
 
