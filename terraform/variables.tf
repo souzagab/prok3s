@@ -1,13 +1,14 @@
-variable "proxmox_token_id" {
+variable "px_user" {
   type = string
 
-  description = "The proxmox api token id"
+  description = "Proxmox Terraform Provider username"
 }
 
-variable "proxmox_token_secret" {
+variable "px_password" {
   type = string
+  sensitive = true
 
-  description = "Proxmox api token secret"
+  description = "Proxmox Terraform Provider password"
 }
 
 variable "agent_count" {
@@ -33,6 +34,7 @@ variable "storage_disk_size" {
 
 variable "proxmox_server" {
   type    = string
+  default = "10.0.0.5"
 
   description = "The proxmox server (IP, url, hostname) to connect to"
 }
@@ -60,9 +62,9 @@ variable "gateway" {
 
 variable "ip_address" {
   type    = string
-  default = "10.0.0.5"
+  default = "10.0.0."
 
-  description = "Default IP address for the vms (10.0.0.5X)"
+  description = "Default IP address for the vms (10.0.0.XX)"
 }
 
 variable "cloudinit_template" {
