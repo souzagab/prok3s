@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: local-lab-g0b-dev
+  namespace: default
+spec:
+  secretName: local-lab-g0b-dev-tls
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: "*.lab.g0b.dev"
+  dnsNames:
+    - lab.g0b.dev
+    - "*.lab.g0b.dev"

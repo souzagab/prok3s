@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lab-g0b-dev
+  namespace: cert-manager
+spec:
+  secretName: lab-g0b-dev-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: "*.lab.g0b.dev"
+  dnsNames:
+    - lab.g0b.dev
+    - "*.lab.g0b.dev"
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "default,media,traefik,monitoring,argocd,longhorn-system"  # Control destination namespaces
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "default,media,traefik,monitoring,argocd,longhorn-system" # Control auto-reflection namespaces

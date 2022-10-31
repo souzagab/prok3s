@@ -107,6 +107,8 @@ serviceAccount:
 # Additional command line flags to pass to cert-manager controller binary.
 # To see all available flags run docker run quay.io/jetstack/cert-manager-controller:<version> --help
 extraArgs:
+  # Since we have a local dns entry for the domains we are using, we need to specify the DNS entries
+  # and disable the local dns
   - --dns01-recursive-nameservers=1.1.1.1:53,9.9.9.9:53
   - --dns01-recursive-nameservers-only
   # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted

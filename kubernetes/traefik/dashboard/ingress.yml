@@ -17,5 +17,5 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
-#  tls:
-#    secretName: lab-kenobi-staging-tls
+  tls:
+    secretName: lab-g0b-dev-tls
