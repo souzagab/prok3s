@@ -31,16 +31,13 @@ tls-reflector: # Clone certificates between namespaces
 	kubectl -n kube-system apply -f https://github.com/emberstack/kubernetes-reflector/releases/latest/download/reflector.yaml
 
 setup-traefik: # Setup Traefik
-	kubectl create namespace traefik
-	helm upgrade --namespace=traefik traefik traefik/traefik --values=./traefik/values.yml
-	kubectl apply -f ./traefik/middleware.yml
-
-traefik-middleware: # Traefik default middlewares
-	kubectl apply -f ./traefik/middleware.yml
+	helm install --create-namespace \
+		--namespace=traefik traefik traefik/traefik \
+		--values=./traefik/values.yml
+	kubectl apply -f ./traefik/middlewares.yml
 
 traefik-dashboard: # Traefik dashboard
 	kubectl apply -f ./traefik/dashboard/secrets.yml \
-		-f ./traefik/dashboard/middleware.yml \
 		-f ./traefik/dashboard/ingress.yml
 
 setup-monitoring: # Setup monitoring
@@ -49,13 +46,6 @@ setup-monitoring: # Setup monitoring
 	kubectl apply -f ./monitoring/volume.yml
 	helm upgrade -n monitoring prometheus prometheus-community/kube-prometheus-stack -f ./monitoring/values.yml
 	kubectl apply -f ./monitoring/ingress.yml
-
-setup-argo:
-	kubectl create namespace argocd
-	kubectl apply -n argocd \
-		-f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-	kubectl patch -n argocd deployment/argocd-server --patch-file ./argo/patch.yml
-	kubectl apply -f ./argo/ingress.yml
 
 %:
 	@:
